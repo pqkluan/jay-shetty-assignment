@@ -1,6 +1,9 @@
 # Assignment requirement
 
-> Create a simple React Native component displaying a workshop list. Each item should be clickable, leading to a mock detail view with static text. Focus on the component structure and navigation. Briefly explain your approach and any React Native libraries used for navigation.
+> Create a simple React Native component displaying a workshop list.
+> Each item should be clickable, leading to a mock detail view with static text.
+> Focus on the component structure and navigation.
+> Briefly explain your approach and any React Native libraries used for navigation.
 
 # Run the project
 
