@@ -1,5 +1,5 @@
 import React, { FC, PropsWithChildren } from 'react';
-import { NavigationContainer, Theme, DefaultTheme } from '@react-navigation/native';
+import { NavigationContainer, Theme } from '@react-navigation/native';
 
 import { Colors } from '../design/Colors';
 
@@ -20,7 +20,6 @@ const onReady = () => {
 };
 
 const CustomTheme: Theme = {
-  ...DefaultTheme,
   colors: {
     primary: Colors.Salmon,
     border: Colors.Transparent,
@@ -29,4 +28,5 @@ const CustomTheme: Theme = {
     card: Colors.White,
     background: Colors.Cultured,
   },
+  dark: false,
 };

@@ -3,6 +3,7 @@ import { StyleSheet } from 'react-native';
 
 import { ScreenWrap } from '../../shared/components/ScreenWrap';
 import { ScreenProps } from '../../navigation/types/ScreenProps';
+
 import { WorkshopList } from '../components/WorkshopList';
 
 export const WorkshopListingScreen: FC<ScreenProps<'WorkshopListingScreen'>> = (props) => {

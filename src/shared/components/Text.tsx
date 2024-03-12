@@ -27,15 +27,24 @@ interface Props extends TextProps {
    * Default is 'Poppins'.
    */
   fontFamily?: keyof typeof Fonts;
+
+  /**
+   * Should text align center?
+   */
+  center?: boolean;
+
+  marginTop?: TextStyle['marginTop'];
 }
 
 export const Text: FC<Props> = (props) => {
   const {
     style: propStyle,
+    center = false,
     color = Colors.Jacarta,
+    fontFamily = 'Poppins',
+    marginTop,
     size = 14,
     weight = '400',
-    fontFamily = 'Poppins',
     ...textProps
   } = props;
 
@@ -44,11 +53,14 @@ export const Text: FC<Props> = (props) => {
       color,
       fontSize: size,
       fontFamily: Fonts[fontFamily][weight],
+      marginTop,
     };
 
+    if (center) style.textAlign = 'center';
     // More styling options can be handled here
+
     return [propStyle, style];
-  }, [color, size, fontFamily, weight, propStyle]);
+  }, [center, color, fontFamily, marginTop, propStyle, size, weight]);
 
   return <NativeText style={combinedStyle} {...textProps} />;
 };

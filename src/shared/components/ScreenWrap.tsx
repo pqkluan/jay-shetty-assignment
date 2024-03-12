@@ -1,8 +1,11 @@
 import React, { ComponentProps, PropsWithChildren } from 'react';
-import { StyleProp, ViewStyle, StyleSheet, View, Text } from 'react-native';
+import { StyleProp, ViewStyle, StyleSheet, View } from 'react-native';
 import { SafeAreaView, SafeAreaViewProps } from 'react-native-safe-area-context';
 
+import { Colors } from '../../design/Colors';
+
 import { ThemedStatusBar } from './ThemedStatusBar';
+import { Text } from './Text';
 
 type Props = PropsWithChildren<{
   edges?: SafeAreaViewProps['edges'];
@@ -33,7 +36,11 @@ export class ScreenWrap extends React.Component<Props, State> {
     const { scheme = 'light', edges, containerStyle, children } = this.props;
 
     if (this.state.hasError) {
-      return <Text>{'UI view has crashed, please reload!'}</Text>;
+      return (
+        <Text color={Colors.MadderLake} center>
+          {'UI view has crashed, please reload!'}
+        </Text>
+      );
     }
 
     return (

@@ -9,13 +9,11 @@ type Props = {
 export const ThemedStatusBar: FC<Props> = (props) => {
   const { scheme } = props;
 
-  if (scheme === 'light') {
+  if (scheme === 'light')
     return <StatusBar backgroundColor={Colors.White} barStyle={'dark-content'} />;
-  }
 
-  if (scheme === 'dark') {
+  if (scheme === 'dark')
     return <StatusBar backgroundColor={Colors.Black} barStyle={'light-content'} />;
-  }
 
   return null;
 };

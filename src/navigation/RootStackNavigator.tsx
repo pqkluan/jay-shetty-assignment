@@ -8,7 +8,6 @@ import { WorkshopDetailsScreen } from '../workshops/screens/WorkshopDetailsScree
 import { WorkshopListingScreen } from '../workshops/screens/WorkshopListingScreen';
 
 import { RootStackParamList } from './types/RootStackParamList';
-import { Colors } from '../design/Colors';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
@@ -16,7 +15,6 @@ const stackScreenOptions: NativeStackNavigationOptions = {
   headerTitleAlign: 'center',
   animation: 'fade',
   headerShadowVisible: true,
-  headerTintColor: Colors.Jacarta,
   fullScreenGestureEnabled: true,
   gestureEnabled: true,
   headerBackTitleVisible: false,
@@ -28,12 +26,12 @@ export const RootStackNavigator: FC = () => {
       <Stack.Screen
         name={'WorkshopListingScreen'}
         component={WorkshopListingScreen}
-        options={{ title: 'Workshops' }}
+        options={{ title: 'Workshops & Meditations' }}
       />
       <Stack.Screen
         name={'WorkshopDetailsScreen'}
         component={WorkshopDetailsScreen}
-        options={{ title: 'Workshop Info' }}
+        options={{ title: 'Genius Workshop' }}
       />
     </Stack.Navigator>
   );

@@ -6,9 +6,10 @@ export const Colors = {
   Jacarta: '#423B60',
   MadderLake: '#CF2E3A',
   MaximumBluePurple: '#BAB0E1',
+  RaisinBlack: '#1E1E22',
   Salmon: '#FF8571',
   TealDeer: '#8FE5A2',
+  Transparent: 'transparent',
   White: '#FFFFFF',
   WinterWizard: '#A1DCFF',
-  Transparent: 'transparent',
 } as const;

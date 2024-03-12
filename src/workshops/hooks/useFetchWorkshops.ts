@@ -1,82 +1,57 @@
-import { Dimensions } from 'react-native';
+import { useMemo } from 'react';
+import { useInfiniteQuery } from '@tanstack/react-query';
+
 import { Workshop } from '../types/Workshop';
-import { GOLDEN_RATIO } from '../constants';
+import { workShopApi } from '../workshopApi';
 
-const uniqueWorkshopData: Pick<Workshop, 'title' | 'tags' | 'duration'>[] = [
-  {
-    title: '129: Perspective & Empathy: Developing Perspective',
-    tags: ['PERSONAL', 'RELATIONSHIPS'],
-    duration: '42:34',
-  },
-  {
-    title: '118: Work from home special',
-    tags: ['WORK', 'HEALTH'],
-    duration: '29:00',
-  },
-  {
-    title: '98: Procrastination: Finding the Root',
-    tags: ['PERSONAL'],
-    duration: '42:10',
-  },
-  {
-    title: '95: Relationship Dynamics: Healthy Conflict Resolution',
-    tags: ['RELATIONSHIPS'],
-    duration: '41:20',
-  },
-  {
-    title: '81: Spirituality: Mindfulness & Meditation Benefits',
-    tags: ['SPIRITUALITY', 'PERSONAL'],
-    duration: '38:03',
-  },
-  {
-    title: '78: Physical Health: 5 Healthy Habits For A Long Life',
-    tags: ['HEALTH', 'PERSONAL'],
-    duration: '37:45',
-  },
-  {
-    title: '71: Stress & Anxiety: Create Your Happy Place',
-    tags: ['PERSONAL', 'HEALTH'],
-    duration: '44:50',
-  },
-  {
-    title: '65: On The Money: Audit Your Money Habits',
-    tags: ['WORK & FINANCE'],
-    duration: '34:54',
-  },
-  {
-    title: '44: Dealing with Loss: Ways of Dealing With Loss',
-    tags: ['PERSONAL', 'SPIRITUALITY'],
-    duration: '34:31',
-  },
-  {
-    title: '18: How to Develop Confidence: Mind',
-    tags: ['PERSONAL'],
-    duration: '39:19',
-  },
-];
+const PAGE_SIZE = 5;
+const emptyWorkshops: Workshop[] = [];
 
-export const useFetchWorkshops = (): {
-  workshops: Workshop[];
-  loading: boolean;
-  error?: string;
-} => {
-  const { width } = Dimensions.get('window');
-  const desiredThumbnailWidth = Math.round(width - 32);
-  const desiredThumbnailHeight = Math.round(desiredThumbnailWidth / GOLDEN_RATIO);
+export const useFetchWorkshops = () => {
+  const {
+    data,
+    refetch,
+    fetchNextPage,
+    isLoading,
+    isFetching,
+    isFetchingNextPage,
+    isError,
+    hasNextPage,
+  } = useInfiniteQuery({
+    queryKey: ['workshops'],
+    initialPageParam: 1,
+    queryFn: async (context) => {
+      const { pageParam } = context;
 
-  const workshops: Workshop[] = uniqueWorkshopData.map((workshop, index) => ({
-    ...workshop,
-    workshopId: String(index),
-    thumbnail: getSampleImage(desiredThumbnailWidth, desiredThumbnailHeight),
-  }));
+      const response = await workShopApi.fetchWorkshops({
+        page: pageParam,
+        pageSize: PAGE_SIZE,
+      });
+
+      return {
+        data: response,
+        pageParam,
+      };
+    },
+    getNextPageParam: (lastPage) => {
+      if (lastPage.data.length < PAGE_SIZE) return undefined;
+      return lastPage.pageParam + 1;
+    },
+  });
+
+  const workshops = useMemo<Workshop[]>(() => {
+    if (!Array.isArray(data?.pages)) return emptyWorkshops;
+    return data.pages.flatMap((page) => page.data);
+  }, [data?.pages]);
 
   return {
     workshops,
-    loading: false,
+    isFetchingInitial: isLoading,
+    isFetching,
+    isFetchingMore: isFetchingNextPage,
+    isError,
+    hasNextPage,
+    refetch,
+    fetchNextPage,
   };
-};
-
-let seed = 1;
-const getSampleImage = (width: number, height: number): string => {
-  return `https://picsum.photos/seed/${seed++}/${width}/${height}`;
 };

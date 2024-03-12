@@ -1,14 +1,16 @@
 import React, { FC, useCallback } from 'react';
-import { Image, StyleSheet, TouchableOpacity, View } from 'react-native';
+import { StyleSheet, TouchableOpacity, View } from 'react-native';
 
 import { Colors } from '../../design/Colors';
+import { ProgressiveImage } from '../../shared/components/ProgressiveImage';
+import { Spacing } from '../../shared/components/Spacing';
 import { Text } from '../../shared/components/Text';
+import { GOLDEN_RATIO } from '../../shared/constants';
 
 import { Workshop } from '../types/Workshop';
-import { GOLDEN_RATIO } from '../constants';
 
 import { TagChips } from './TagChips';
-import { Spacing } from '../../shared/components/Spacing';
+import { VideoDurationChip } from './VideoDurationChip';
 
 type Props = {
   workshop: Workshop;
@@ -25,13 +27,10 @@ export const WorkshopListItem: FC<Props> = (props) => {
     <View style={styles.container}>
       <TouchableOpacity onPress={handlePress} activeOpacity={0.6}>
         <View style={styles.thumbnailWrap}>
-          <Image source={{ uri }} style={styles.thumbnail} />
-          <View style={styles.durationWrap}>
-            <Text color={Colors.White} size={12} weight="500">
-              {duration}
-            </Text>
-          </View>
+          <ProgressiveImage source={{ uri }} style={styles.thumbnail} />
+          <VideoDurationChip duration={duration} />
         </View>
+
         <View style={styles.subContainer}>
           <TagChips tags={tags} />
           <Spacing size={8} />
@@ -56,16 +55,6 @@ const styles = StyleSheet.create({
     shadowRadius: 4.65,
   },
   thumbnailWrap: {},
-  durationWrap: {
-    position: 'absolute',
-    bottom: 0,
-    right: 0,
-
-    paddingVertical: 1.5,
-    paddingHorizontal: 6,
-
-    backgroundColor: 'rgba(0,0,0,0.5)',
-  },
   thumbnail: {
     width: '100%',
     height: undefined,

@@ -4,4 +4,10 @@ module.exports = {
   rules: {
     'prettier/prettier': 0,
   },
+  overrides: [{
+    files: ['*.ts', '*.tsx'],
+    rules: {
+      'curly': ['error', 'multi-or-nest', 'consistent'],
+    },
+  }],
 };

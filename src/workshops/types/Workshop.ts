@@ -9,5 +9,9 @@ export type Workshop = {
 };
 
 export interface WorkshopDetails extends Workshop {
-  // More stuffs...
+  content: {
+    id: string;
+    title: string;
+    description: string;
+  }[];
 }
