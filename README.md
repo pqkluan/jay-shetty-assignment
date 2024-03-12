@@ -7,10 +7,10 @@
 
 ## Result screenshot
 
-| Context          | Android                                          | iOS                                          |
-| ---------------- | ------------------------------------------------ | -------------------------------------------- |
-| Workshop listing | <img src="./docs/android-workshop-list.png"/>    | <img src="./docs/ios-workshop-list.png"/>    |
-| Workshop details | <img src="./docs/android-workshop-details.png"/> | <img src="./docs/ios-workshop-details.png"/> |
+| Context          | Android                                                      | iOS                                                      |
+| ---------------- | ------------------------------------------------------------ | -------------------------------------------------------- |
+| Workshop listing | <img src="./docs/android-workshop-list.png" width="500"/>    | <img src="./docs/ios-workshop-list.png" width="500"/>    |
+| Workshop details | <img src="./docs/android-workshop-details.png" width="500"/> | <img src="./docs/ios-workshop-details.png" width="500"/> |
 
 ## Assignment approach breakdown
 
